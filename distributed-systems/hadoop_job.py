@@ -1,13 +1,8 @@
-from mrjob.job import MRJob
+from rf_research.config import RFConfig
+from rf_research.distributed.hadoop_job import aggregate_signal_strength
 
-class RFMLJob(MRJob):
-    def mapper(self, _, line):
-        fields = line.split(',')
-        if fields[1].isdigit():
-            yield fields[0], int(fields[1])
-
-    def reducer(self, key, values):
-        yield key, sum(values)
 
 if __name__ == "__main__":
-    RFMLJob.run()
+    config = RFConfig()
+    output = aggregate_signal_strength(config)
+    print("Summary written to", output)

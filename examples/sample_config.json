@@ -1,0 +1,16 @@
+{
+  "data_path": "data/radio_frequencies.csv",
+  "processed_path": "outputs/processed_radio_frequencies.csv",
+  "model_path": "models/rfml_model.json",
+  "report_path": "outputs/evaluation_report.json",
+  "collection_path": "outputs/rf_collection.json",
+  "analysis_path": "outputs/rf_analysis.json",
+  "samples": 512,
+  "features": 6,
+  "classes": 4,
+  "train_ratio": 0.8,
+  "seed": 42,
+  "learning_rate": 0.05,
+  "epochs": 50,
+  "batch_size": 64
+}
