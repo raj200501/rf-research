@@ -1,12 +1,21 @@
-import boto3
+"""Utility functions for distributed jobs (local-only)."""
 
-def upload_to_s3(file_name, bucket, object_name=None):
-    s3_client = boto3.client('s3')
-    try:
-        s3_client.upload_file(file_name, bucket, object_name or file_name)
-        print(f'Successfully uploaded {file_name} to {bucket}')
-    except Exception as e:
-        print(f'Failed to upload {file_name}: {e}')
+from pathlib import Path
+import shutil
+
+from rf_research.config import RFConfig
+
+
+def upload_to_local_archive(file_name, archive_dir):
+    archive_dir = Path(archive_dir)
+    archive_dir.mkdir(parents=True, exist_ok=True)
+    destination = archive_dir / Path(file_name).name
+    shutil.copy(file_name, destination)
+    print(f"Archived {file_name} to {destination}")
+    return destination
+
 
 if __name__ == "__main__":
-    upload_to_s3('processed_radio_frequencies.csv', 'my-bucket')
+    config = RFConfig()
+    config.ensure_directories()
+    upload_to_local_archive(config.processed_path, config.processed_path.parent / "archive")

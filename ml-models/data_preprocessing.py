@@ -1,18 +1,18 @@
-import pandas as pd
-from sklearn.preprocessing import StandardScaler
+"""Backward-compatible preprocessing utilities."""
 
-def load_data(file_path):
-    data = pd.read_csv(file_path)
-    features = data.iloc[:, :-1].values
-    labels = data.iloc[:, -1].values
-    return features, labels
+from rf_research.data import load_or_generate_dataset
+from rf_research.preprocessing import StandardScaler
+from rf_research.config import RFConfig
+
+
+def load_data(file_path=None):
+    config = RFConfig()
+    if file_path is not None:
+        config = config.__class__(**{**config.__dict__, "data_path": file_path})
+    dataset = load_or_generate_dataset(config)
+    return dataset.features, dataset.labels
+
 
 def preprocess_data(features):
     scaler = StandardScaler()
-    scaled_features = scaler.fit_transform(features)
-    return scaled_features
-
-if __name__ == "__main__":
-    features, labels = load_data('radio_frequencies.csv')
-    scaled_features = preprocess_data(features)
-    # Save or use scaled_features and labels for training
+    return scaler.fit_transform(features)

@@ -1,64 +1,22 @@
 # Installation Guide
 
-## Backend
+## Prerequisites
 
-1. Clone the repository:
+- Python 3.10+ with `venv`
+- GCC toolchain (for the `core-os` demo)
 
-   git clone https://github.com/yourusername/aws-ml-research-fellow.git
-   cd aws-ml-research-fellow/ml-models
-Create a virtual environment and activate it:
+## Local Setup
 
+```bash
+./scripts/bootstrap.sh
+```
 
-python3 -m venv venv
-source venv/bin/activate
-Install the dependencies:
+The bootstrap script creates `.venv`. No external Python dependencies are required.
 
+## Optional: Clean Reset
 
-pip install -r requirements.txt
-Run the training script:
+```bash
+rm -rf .venv outputs models data/radio_frequencies.csv
+```
 
-
-python training.py
-Distributed Systems
-Navigate to the distributed-systems directory:
-
-
-cd ../distributed-systems
-Run the Spark job:
-
-
-spark-submit spark_job.py
-Run the Hadoop job:
-
-
-python hadoop_job.py
-Core OS
-Navigate to the core-os directory:
-
-
-cd ../core-os
-Build the project:
-
-
-make
-Run the executable:
-
-
-./ai_integration secure
-To monitor system performance:
-
-
-./ai_integration monitor
-National Security Applications
-Navigate to the national-security directory:
-
-
-cd ../national-security
-Run the data collection script:
-
-
-python data_collection.py
-Run the analysis script:
-
-
-python analysis.py
+Then rerun the bootstrap and quickstart commands.

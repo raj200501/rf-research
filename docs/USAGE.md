@@ -1,44 +1,57 @@
-### **docs/USAGE.md**
-
-```markdown
 # Usage Guide
+
+## Run the Full Workflow
+
+```bash
+./scripts/run.sh
+```
 
 ## Machine Learning Models
 
-1. Train the model:
+Train the model and produce a report:
 
-   cd ml-models
-   python training.py
+```bash
+python -m rf_research.cli train
+```
+
 Evaluate the model:
 
-python evaluation.py
-Distributed Systems
-Process data with Spark:
+```bash
+python -m rf_research.cli evaluate
+```
 
+## Distributed Systems (Local Simulation)
 
-cd ../distributed-systems
-spark-submit spark_job.py
-Process data with Hadoop:
+Spark-like data processing:
 
+```bash
+python -m rf_research.cli spark
+```
 
-python hadoop_job.py
-Core OS
-Perform secure operations:
+Hadoop-like aggregation:
 
+```bash
+python -m rf_research.cli hadoop
+```
 
-cd ../core-os
-./ai_integration secure
-Monitor system performance:
+## Core OS Demo
 
+```bash
+make -C core-os
+./core-os/ai_integration secure
+./core-os/ai_integration monitor 2 1
+```
 
-./ai_integration monitor
-National Security Applications
-Collect RF data:
+## National Security Simulation
 
+Collect RF data locally:
 
-cd ../national-security
-python data_collection.py
-Analyze RF data:
+```bash
+python -m rf_research.cli collect
+```
 
+Analyze the collection:
 
-python analysis.py
+```bash
+python -m rf_research.cli analyze
+```
