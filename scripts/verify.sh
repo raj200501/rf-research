@@ -5,7 +5,10 @@ SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 REPO_ROOT=$(cd "$SCRIPT_DIR/.." && pwd)
 
 "$SCRIPT_DIR/bootstrap.sh"
-source "$REPO_ROOT/.venv/bin/activate"
+if [[ -f "$REPO_ROOT/.venv/bin/activate" ]]; then
+  # shellcheck disable=SC1090
+  source "$REPO_ROOT/.venv/bin/activate"
+fi
 
 python -m unittest discover -s tests
 
